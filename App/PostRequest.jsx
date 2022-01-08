@@ -5,13 +5,16 @@ class PostRequest extends React.Component {
         super(props);
 
         this.state = {
-            postId: null,
             practice_id: 2,
-            user_code: null,
+            user_code: "print(num1 + num2)",
             run_type: "submit",
             result: "",
             error_message: "",
         };
+    }
+
+    handleUserCodeChange = (e) => {
+        this.setState({user_code: e.target.value});
     }
 
     handleSubmit = (e) => {
@@ -19,17 +22,15 @@ class PostRequest extends React.Component {
         // Simple POST request with a JSON body using fetch
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: 'my user code' })
+            headers: { 'Content-Type': 'application/json', 'Central-Api-Key':'u5zgIU-FAx_dLUAE29t-xw' },
+            body: JSON.stringify({ "practice_id": this.state.practice_id, "user_code": this.state.user_code, "run_type": this.state.run_type})
         };
         fetch('https://reqres.in/api/posts', requestOptions)
             .then(response => response.json())
-            .then(data => this.setState({ postId: data.id }));        
+            .then(data => this.setState({ result: data.practice_run_result.successful }));        
     }
 
     render() {
-        const { postId } = this.state;
-        const { practice_id} = this.state;
         const { result} = this.state;
         const { error_message} = this.state;
 
@@ -38,14 +39,13 @@ class PostRequest extends React.Component {
                 <h5 className="card-header">Python &gt; Basic &gt; İki Sayıyı Topla</h5>
                 <div className="card-body">
                     <form onSubmit = {this.handleSubmit}>
-                        <input type="textarea" id="ucode" name="ucode"></input>
+                        <input type="textarea" id="ucode" name="ucode" value={this.state.user_code} onChange={this.handleUserCodeChange}></input>
                         <br />
                         <input type="submit" value="Gönder"></input>
                         <br />
                     </form>
                 </div>
-                <div className="card-body">                    
-                    <p>Returned Id: {postId}</p>
+                <div className="card-body">
                     <p>Result: {result}</p>
                     <p>Error message: {error_message}</p>
                 </div>
