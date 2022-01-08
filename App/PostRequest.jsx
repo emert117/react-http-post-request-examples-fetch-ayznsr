@@ -5,7 +5,12 @@ class PostRequest extends React.Component {
         super(props);
 
         this.state = {
-            postId: null
+            postId: null,
+            practice_id: 2,
+            user_code: null,
+            run_type: "submit",
+            result: "",
+            error_message: "",
         };
     }
 
@@ -24,6 +29,10 @@ class PostRequest extends React.Component {
 
     render() {
         const { postId } = this.state;
+        const { practice_id} = this.state;
+        const { result} = this.state;
+        const { error_message} = this.state;
+
         return (
             <div className="card text-center m-3">
                 <h5 className="card-header">Python &gt; Basic &gt; İki Sayıyı Topla</h5>
@@ -34,7 +43,11 @@ class PostRequest extends React.Component {
                         <input type="submit" value="Gönder"></input>
                         <br />
                     </form>
-                    Returned Id: {postId}
+                </div>
+                <div className="card-body">                    
+                    <p>Returned Id: {postId}</p>
+                    <p>Result: {result}</p>
+                    <p>Error message: {error_message}</p>
                 </div>
             </div>
         );
