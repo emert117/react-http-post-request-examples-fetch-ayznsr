@@ -19,8 +19,7 @@ class PostRequest extends React.Component {
         };
         fetch('https://reqres.in/api/posts', requestOptions)
             .then(response => response.json())
-            .then(data => this.setState({ postId: data.id }));
-        
+            .then(data => this.setState({ postId: data.id }));        
     }
 
     render() {
@@ -30,7 +29,7 @@ class PostRequest extends React.Component {
                 <h5 className="card-header">Python &gt; Basic &gt; İki Sayıyı Topla</h5>
                 <div className="card-body">
                     <form onSubmit = {this.handleSubmit}>
-                        <input type="text" id="ucode" name="ucode"></input>
+                        <input type="textarea" id="ucode" name="ucode"></input>
                         <br />
                         <input type="submit" value="Gönder"></input>
                         <br />
